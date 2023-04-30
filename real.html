@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>zRxd Countdown</title>
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			font-family: monospace;
+			font-size: 1.5em;
+			line-height: 1.2;
+			text-align: center;
+			padding-top: 50px;
+			padding-bottom: 50px;
+			cursor: url('https://static.wikia.nocookie.net/iwbtb/images/4/4c/Cursor.png'), auto;
+		}
+		#countdown {
+			margin-top: 30px;
+		}
+		#terminal-container {
+			display: inline-block;
+			background-color: #0d0d0d;
+			padding: 10px;
+			border-radius: 0px;
+			box-shadow: 0px 0px 0px 2px #171717;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		#zrxd-text {
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="terminal-container">
+		<p>@zRxd:~$ OFFdeath is happening<span id="zrxd-text"></span></p>
+		<div id="countdown"></div>
+	</div>
+
+	<script>
+		// Set the date we're counting down to
+		var countDownDate = new Date("2023-05-31T00:00:00Z").getTime();
+
+		// Update the countdown every second
+		var x = setInterval(function() {
+
+			// Get the current time
+			var now = new Date().getTime();
+
+			// Calculate the remaining time
+			var distance = countDownDate - now;
+
+			// Calculate days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			// Display the countdown in the element with id="countdown"
+			document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+			// If the countdown is finished, display the text
+			if (distance < 0) {
+				clearInterval(x);
+				document.getElementById("countdown").innerHTML = "EXPIRED";
+			}
+
+			// Animate the zRxd text
+			animateZrxdText();
+		}, 1000);
+
+		// Function to animate the zRxd text
+		function animateZrxdText() {
+			var zrxdText = document.getElementById("zrxd-text");
+			var text = zrxdText.innerHTML;
+			var dots = text.match(/\./g);
+			if (dots === null) {
+				dots = [];
+			}
+			if (dots.length < 3) {
+				zrxdText.innerHTML = text + ".";
+			} else {
+				zrxdText.innerHTML = "";
+			}
+		}
+	</script>
+</body>
+</html>
